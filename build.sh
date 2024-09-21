@@ -37,8 +37,10 @@ fi
 echo -e "\n# . .venv/bin/activate\n"
 . .venv/bin/activate
 
-echo -e "\n# rm -rf build\n"
-rm -rf build
+if [[ -d build ]]; then
+    echo -e "\n# rm -rf build\n"
+    rm -rf build
+fi
 
 echo -e "\n# cmake -S atlas-cmake-nanobind-example -B build\n"
 cmake \
