@@ -7,7 +7,7 @@ This repository intentionally produces a `nanobind` module and not an Python lib
 
 ## Requirements
 
-* Any CVMFS enabled machine or an ATLAS analysis release Linux container
+* Any CVMFS enabled machine or an ATLAS analysis release Linux container (e.g. `gitlab-registry.cern.ch/atlas/athena/analysisbase:25.2.27`)
 
 ## Getting started
 
