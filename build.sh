@@ -11,8 +11,15 @@ lsetup git
 echo -e "\n# rm -rf build\n"
 rm -rf build
 
-echo -e "\n# asetup AnalysisBase,main,latest\n"
-asetup AnalysisBase,main,latest
+# Setup release
+if [[ -f /release_setup.sh ]]; then
+    echo -e "\n# Assuming inside a Linux container"
+    echo -e "\n# . /release_setup.sh\n"
+    . /release_setup.sh
+else
+    echo -e "\n# asetup AnalysisBase,main,latest\n"
+    asetup AnalysisBase,main,latest
+fi
 
 if [[ ! -x $(command -v cvmfs-venv) ]]; then
     # Ensure https://github.com/matthewfeickert/cvmfs-venv installed
