@@ -56,8 +56,8 @@ cmake \
 echo -e "\n# cd build\n"
 cd build
 
-echo -e "\n# python -c 'import my_ext; print(my_ext.add(1, 2))'\n"
-python -c 'import my_ext; print(my_ext.add(1, 2))'
+echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'\n"
+python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'
 
-echo -e "\n# python -c 'import my_ext; print(my_ext.add(a=1, b=2))'\n"
-python -c 'import my_ext; print(my_ext.add(a=1, b=2))'
+echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'\n"
+python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'

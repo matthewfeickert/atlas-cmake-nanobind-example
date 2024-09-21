@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15...3.30)
-project(my_project)
+project(nanobind_atlas_cmake_example)
 
 if (CMAKE_VERSION VERSION_LESS 3.18)
   set(DEV_MODULE Development)
