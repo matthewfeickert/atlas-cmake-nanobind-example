@@ -27,3 +27,11 @@ and then copy the build script out and run it
 cp atlas-cmake-nanobind-example/build.sh .
 bash build.sh
 ```
+
+As a single copy-pastable command:
+
+```
+git clone https://github.com/matthewfeickert/atlas-cmake-nanobind-example && \
+cp atlas-cmake-nanobind-example/build.sh . && \
+bash build.sh
+```
