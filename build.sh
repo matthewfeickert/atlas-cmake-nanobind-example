@@ -9,7 +9,7 @@ else
     echo -e "\n# setupATLAS\n"
     export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
     # Allows for working with wrappers as well
-    source "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh" --quiet || echo "~~~ERROR: setupATLAS failed!~~~"
+    . "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh" --quiet || echo "~~~ERROR: setupATLAS failed!~~~"
 
     echo -e "\n# lsetup git\n"
     lsetup git
