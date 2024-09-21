@@ -1,22 +1,19 @@
 #!/bin/bash
 
-echo -e "\n# setupATLAS\n"
-export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
-# Allows for working with wrappers as well
-source "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh" --quiet || echo "~~~ERROR: setupATLAS failed!~~~"
-
-echo -e "\n# lsetup git\n"
-lsetup git
-
-echo -e "\n# rm -rf build\n"
-rm -rf build
-
 # Setup release
 if [[ -f /release_setup.sh ]]; then
     echo -e "\n# Assuming inside a Linux container"
     echo -e "\n# . /release_setup.sh\n"
     . /release_setup.sh
 else
+    echo -e "\n# setupATLAS\n"
+    export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
+    # Allows for working with wrappers as well
+    source "${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh" --quiet || echo "~~~ERROR: setupATLAS failed!~~~"
+
+    echo -e "\n# lsetup git\n"
+    lsetup git
+
     echo -e "\n# asetup AnalysisBase,main,latest\n"
     asetup AnalysisBase,main,latest
 fi
@@ -40,7 +37,8 @@ fi
 echo -e "\n# . .venv/bin/activate\n"
 . .venv/bin/activate
 
-mkdir -p build
+echo -e "\n# rm -rf build\n"
+rm -rf build
 
 echo -e "\n# cmake -S atlas-cmake-nanobind-example -B build\n"
 cmake \
