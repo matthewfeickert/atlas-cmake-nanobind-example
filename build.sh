@@ -42,9 +42,8 @@ if [[ -d build ]]; then
     rm -rf build
 fi
 
-echo -e "\n# cmake -DCMAKE_INSTALL_PREFIX=$(readlink -f .venv) -S atlas-cmake-nanobind-example -B build\n"
+echo -e "\n# cmake -S atlas-cmake-nanobind-example -B build\n"
 cmake \
-    -DCMAKE_INSTALL_PREFIX=$(readlink -f .venv) \
     -S atlas-cmake-nanobind-example \
     -B build
 
@@ -61,10 +60,8 @@ cmake \
     --clean-first \
     --parallel 8
 
-cmake --install build
-
-# echo -e "\n# cd build\n"
-# cd build
+echo -e "\n# cd build\n"
+cd build
 
 echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'\n"
 python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'
