@@ -14,6 +14,7 @@ else
     echo -e "\n# lsetup git\n"
     lsetup git
 
+    # Just need to be post Analysis release v25.2.30
     echo -e "\n# asetup AnalysisBase,main,latest\n"
     asetup AnalysisBase,main,latest
 fi
@@ -30,7 +31,7 @@ if [[ ! -d .venv ]]; then
     # Ensure user controlled virtual environment
     cvmfs-venv .venv
     . .venv/bin/activate
-    uv pip install --upgrade nanobind pytest
+    uv pip install --upgrade pytest
     deactivate
 fi
 
