@@ -38,31 +38,31 @@ fi
 echo -e "\n# . .venv/bin/activate\n"
 . .venv/bin/activate
 
-if [[ -d build ]]; then
-    echo -e "\n# rm -rf build\n"
-    rm -rf build
+if [[ -d build_normal_cmake ]]; then
+    echo -e "\n# rm -rf build_normal_cmake\n"
+    rm -rf build_normal_cmake
 fi
 
-echo -e "\n# cmake -S atlas-cmake-nanobind-example -B build\n"
+echo -e "\n# cmake -S atlas-cmake-nanobind-example/normal_cmake -B build_normal_cmake\n"
 cmake \
-    -S atlas-cmake-nanobind-example \
-    -B build
+    -S atlas-cmake-nanobind-example/normal_cmake \
+    -B build_normal_cmake
 
-echo -e "\n# cmake build -LH\n"
-cmake build -LH
+echo -e "\n# cmake build_normal_cmake -LH\n"
+cmake build_normal_cmake -LH
 
-echo -e "\n# cmake --build build --clean-first --parallel 8\n"
+echo -e "\n# cmake --build build_normal_cmake --clean-first --parallel 8\n"
 # cmake \
-#     --build build \
+#     --build build_normal_cmake \
 #     --clean-first \
 #     --parallel $(nproc --ignore=1)
 cmake \
-    --build build \
+    --build build_normal_cmake \
     --clean-first \
     --parallel 8
 
-echo -e "\n# cd build\n"
-cd build
+echo -e "\n# cd build_normal_cmake\n"
+cd build_normal_cmake
 
 echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'\n"
 python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'
