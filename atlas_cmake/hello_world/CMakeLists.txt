@@ -2,42 +2,32 @@ cmake_minimum_required(VERSION 3.15...3.30)
 # ATLAS CMake requires "atlas_subdir" instead of "project"
 atlas_subdir(hello_world)
 
-if (CMAKE_VERSION VERSION_LESS 3.18)
-  set(DEV_MODULE Development)
-else()
-  set(DEV_MODULE Development.Module)
-endif()
+# taken from https://gitlab.com/CLIUtils/modern-cmake/-/tree/861f0ce7052b0826261378e412e58533e1982ce4/examples/simple-project
+# If you set any CMAKE_ variables, that can go here.
+# (But usually don't do this, except maybe for C++ standard)
 
-find_package(Python 3.8 COMPONENTS Interpreter ${DEV_MODULE} REQUIRED)
+# Find packages go here.
 
-if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
-endif()
+# You should usually split this into folders, but this is a simple example
 
-# Detect the installed nanobind package and import it into CMake
-execute_process(
-  COMMAND "${Python_EXECUTABLE}" -m nanobind --cmake_dir
-  OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE nanobind_ROOT)
-find_package(nanobind CONFIG REQUIRED)
+# This is a "default" library, and will match the *** variable setting.
+# Other common choices are STATIC, SHARED, and MODULE
+# Including header files here helps IDEs but is not required.
+# Output libname matches target name, with the usual extensions on your system
+add_library(MyLibExample simple_lib.cpp simple_lib.h)
 
-nanobind_add_module(
-  # Name of the extension
-  nanobind_example_ext
+# Link each target with other targets or add options, etc.
 
-  # Target the stable ABI for Python 3.12+, which reduces
-  # the number of binary wheels that must be built. This
-  # does nothing on older Python versions
-  STABLE_ABI
+# Adding something we can run - Output name matches target name
+add_executable(MyExample simple_example.cpp)
 
-  # Build libnanobind statically and merge it into the
-  # extension (which itself remains a shared library)
-  #
-  # If your project builds multiple extensions, you can
-  # replace this flag by NB_SHARED to conserve space by
-  # reusing a shared libnanobind across libraries
-  NB_STATIC
+# Make sure you link your targets with this command. It can also link libraries and
+# even flags, so linking a target that does not exist will not give a configure-time error.
+target_link_libraries(MyExample PRIVATE MyLibExample)
 
-  # Source code goes here
-  src/nanobind_example_ext.cpp
-)
+## [main]
+
+# This part is so the Modern CMake book can verify this example builds. For your code,
+# you'll probably want tests too
+enable_testing()
+add_test(NAME MyExample COMMAND MyExample)
