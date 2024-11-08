@@ -15,8 +15,8 @@ else
     lsetup git
 
     # Just need to be post Analysis release v25.2.30
-    echo -e "\n# asetup AnalysisBase,main,latest\n"
-    asetup AnalysisBase,main,latest
+    echo -e "\n# asetup AnalysisBase,25.2.30\n"
+    asetup AnalysisBase,25.2.30
 fi
 
 if [[ -d build_atlas_cmake ]]; then
@@ -24,8 +24,9 @@ if [[ -d build_atlas_cmake ]]; then
     rm -rf build_atlas_cmake
 fi
 
-echo -e "\n# cmake -S atlas_cmake -B build_atlas_cmake\n"
+echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -S atlas_cmake -B build_atlas_cmake\n"
 cmake \
+    -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
     -S atlas_cmake \
     -B build_atlas_cmake
 
