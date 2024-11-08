@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15...3.30)
 # ATLAS CMake requires "atlas_subdir" instead of "project"
-atlas_subdir(hello_world)
+atlas_subdir(simple_project)
 
 # taken from https://gitlab.com/CLIUtils/modern-cmake/-/tree/861f0ce7052b0826261378e412e58533e1982ce4/examples/simple-project
 # If you set any CMAKE_ variables, that can go here.
