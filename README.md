@@ -12,27 +12,21 @@ This repository intentionally produces a `nanobind` module and not an Python lib
 
 ## Getting started
 
-This example is meant to represent a repository that would be included as a module in an ATLAS CMake build.
-So the build scripts inside of it should be used from _outside_ the repository.
-You can of course build inside of the repository as well.
-
-So clone the repository
+This repository contains examples of projects that could be included as modules in an ATLAS CMake build.
+First clone the repository and navigate inside of it
 
 ```
-git clone git@github.com:matthewfeickert/atlas-cmake-nanobind-example.git
+git clone git@github.com:matthewfeickert/atlas-cmake-nanobind-example.git && cd atlas-cmake-nanobind-example
 ```
 
-and then copy the build script out and run it
+To run the "normal" CMake example with `nanobind` run
 
 ```
-cp atlas-cmake-nanobind-example/build.sh .
 bash build.sh
 ```
 
-As a single copy-pastable command:
+and to run the ATLAS CMake example run
 
 ```
-git clone https://github.com/matthewfeickert/atlas-cmake-nanobind-example && \
-cp atlas-cmake-nanobind-example/build.sh . && \
-bash build.sh
+bash build_atlas_cmake.sh
 ```
