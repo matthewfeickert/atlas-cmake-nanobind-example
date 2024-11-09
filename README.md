@@ -22,7 +22,7 @@ git clone git@github.com:matthewfeickert/atlas-cmake-nanobind-example.git && cd 
 To run the "normal" CMake example with `nanobind` run
 
 ```
-bash build.sh
+bash build_normal_cmake.sh
 ```
 
 and to run the ATLAS CMake example run
