@@ -27,15 +27,15 @@ target_include_directories(examplelib PUBLIC include)
 # Link each target with other targets or add options, etc.
 
 # Adding something we can run - Output name matches target name
-add_executable(MyExample src/simple_example.cpp)
+add_executable(example-bin src/simple_example.cpp)
 
 # Make sure you link your targets with this command. It can also link libraries and
 # even flags, so linking a target that does not exist will not give a configure-time error.
-target_link_libraries(MyExample PRIVATE examplelib)
+target_link_libraries(example-bin PRIVATE examplelib)
 
 ## [main]
 
 # This part is so the Modern CMake book can verify this example builds. For your code,
 # you'll probably want tests too
 enable_testing()
-add_test(NAME MyExample COMMAND MyExample)
+add_test(NAME example-bin COMMAND example-bin)

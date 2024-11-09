@@ -53,5 +53,5 @@ cd build_atlas_cmake
 echo -e "\n# find . -type f -iname '*.so'\n"
 find . -type f -iname '*examplelib*'
 
-echo -e "\n# ./MyExample\n"
-./MyExample
+echo -e "\n# ./example-bin\n"
+./example-bin
