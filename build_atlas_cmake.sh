@@ -25,9 +25,13 @@ if [[ -d build_atlas_cmake ]]; then
 fi
 
 echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -S atlas_cmake -B build_atlas_cmake\n"
+# cmake \
+#     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
+#     -S atlas_cmake \
+#     -B build_atlas_cmake
 cmake \
     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
-    -S atlas_cmake \
+    -S atlas_cmake/simple_project \
     -B build_atlas_cmake
 
 echo -e "\n# cmake build_atlas_cmake -LH\n"
@@ -45,3 +49,9 @@ cmake \
 
 echo -e "\n# cd build_atlas_cmake\n"
 cd build_atlas_cmake
+
+echo -e "\n# find . -type f -iname '*.so'\n"
+find . -type f -iname '*MyLibExample*'
+
+echo -e "\n# ./MyExample\n"
+./MyExample

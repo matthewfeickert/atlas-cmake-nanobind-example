@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.15...3.30)
 # ATLAS CMake requires "atlas_subdir" instead of "project"
-atlas_subdir(simple_project)
+# atlas_subdir(simple_project)
+project(simple_project)
 
 # taken from https://gitlab.com/CLIUtils/modern-cmake/-/tree/861f0ce7052b0826261378e412e58533e1982ce4/examples/simple-project
 # If you set any CMAKE_ variables, that can go here.
@@ -14,7 +15,14 @@ atlas_subdir(simple_project)
 # Other common choices are STATIC, SHARED, and MODULE
 # Including header files here helps IDEs but is not required.
 # Output libname matches target name, with the usual extensions on your system
-add_library(MyLibExample simple_lib.cpp simple_lib.h)
+
+# add_library(MyLibExample simple_lib.cpp include/simple_lib.h)
+set(HEADER_LIST "${simple_project_SOURCE_DIR}/include/simple_lib.h")
+add_library(MyLibExample simple_lib.cpp ${HEADER_LIST})
+
+# We need this directory, and users of our library will need it too
+target_include_directories(MyLibExample PUBLIC include)
+
 
 # Link each target with other targets or add options, etc.
 
