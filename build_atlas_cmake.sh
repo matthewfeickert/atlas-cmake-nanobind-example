@@ -24,11 +24,7 @@ if [[ -d build_atlas_cmake ]]; then
     rm -rf build_atlas_cmake
 fi
 
-echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -S atlas_cmake -B build_atlas_cmake\n"
-# cmake \
-#     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
-#     -S atlas_cmake/simple_project \
-#     -B build_atlas_cmake
+echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -S atlas_cmake/Projects/WorkDir -B build_atlas_cmake\n"
 cmake \
     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
     -S atlas_cmake/Projects/WorkDir \
