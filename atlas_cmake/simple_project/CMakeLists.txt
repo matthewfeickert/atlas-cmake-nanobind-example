@@ -18,7 +18,7 @@ project(simple_project)
 
 # add_library(MyLibExample simple_lib.cpp include/simple_lib.h)
 set(HEADER_LIST "${simple_project_SOURCE_DIR}/include/simple_lib.h")
-add_library(MyLibExample simple_lib.cpp ${HEADER_LIST})
+add_library(MyLibExample src/simple/simple_lib.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
 target_include_directories(MyLibExample PUBLIC include)
@@ -27,7 +27,7 @@ target_include_directories(MyLibExample PUBLIC include)
 # Link each target with other targets or add options, etc.
 
 # Adding something we can run - Output name matches target name
-add_executable(MyExample simple_example.cpp)
+add_executable(MyExample src/simple_example.cpp)
 
 # Make sure you link your targets with this command. It can also link libraries and
 # even flags, so linking a target that does not exist will not give a configure-time error.
