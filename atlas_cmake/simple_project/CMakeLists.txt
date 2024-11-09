@@ -16,12 +16,12 @@ project(simple_project)
 # Including header files here helps IDEs but is not required.
 # Output libname matches target name, with the usual extensions on your system
 
-# add_library(MyLibExample simple_lib.cpp include/simple_lib.h)
+# add_library(examplelib simple_lib.cpp include/simple_lib.h)
 set(HEADER_LIST "${simple_project_SOURCE_DIR}/include/simple_lib.h")
-add_library(MyLibExample src/simple/simple_lib.cpp ${HEADER_LIST})
+add_library(examplelib src/simple/simple_lib.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
-target_include_directories(MyLibExample PUBLIC include)
+target_include_directories(examplelib PUBLIC include)
 
 
 # Link each target with other targets or add options, etc.
@@ -31,7 +31,7 @@ add_executable(MyExample src/simple_example.cpp)
 
 # Make sure you link your targets with this command. It can also link libraries and
 # even flags, so linking a target that does not exist will not give a configure-time error.
-target_link_libraries(MyExample PRIVATE MyLibExample)
+target_link_libraries(MyExample PRIVATE examplelib)
 
 ## [main]
 
