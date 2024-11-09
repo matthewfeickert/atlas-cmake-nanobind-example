@@ -16,7 +16,7 @@ project(simple_project)
 # Including header files here helps IDEs but is not required.
 # Output libname matches target name, with the usual extensions on your system
 set(HEADER_LIST "${PROJECT_SOURCE_DIR}/include/simple_lib.h")
-add_library(examplelib "${PROJECT_SOURCE_DIR}/src/simple/simple_lib.cpp" ${HEADER_LIST})
+add_library(examplelib SHARED "${PROJECT_SOURCE_DIR}/src/simple/simple_lib.cpp" ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
 target_include_directories(examplelib PUBLIC include)
