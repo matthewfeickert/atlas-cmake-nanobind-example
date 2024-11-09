@@ -43,9 +43,9 @@ if [[ -d build_normal_cmake ]]; then
     rm -rf build_normal_cmake
 fi
 
-echo -e "\n# cmake -S atlas-cmake-nanobind-example/normal_cmake -B build_normal_cmake\n"
+echo -e "\n# cmake -S normal_cmake -B build_normal_cmake\n"
 cmake \
-    -S atlas-cmake-nanobind-example/normal_cmake \
+    -S normal_cmake \
     -B build_normal_cmake
 
 echo -e "\n# cmake build_normal_cmake -LH\n"
