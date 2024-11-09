@@ -31,7 +31,7 @@ echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -
 #     -B build_atlas_cmake
 cmake \
     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
-    -S atlas_cmake \
+    -S atlas_cmake/Projects/WorkDir \
     -B build_atlas_cmake
 
 echo -e "\n# cmake build_atlas_cmake -LH\n"
