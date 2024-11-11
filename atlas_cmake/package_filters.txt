@@ -1,4 +1,4 @@
 # + simple_project
 + nanobind_example
-#
-# - .*
+
+- .*
