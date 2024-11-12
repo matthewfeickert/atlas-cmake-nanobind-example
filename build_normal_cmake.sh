@@ -45,6 +45,7 @@ fi
 
 echo -e "\n# cmake -S normal_cmake -B build_normal_cmake\n"
 cmake \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
     -S normal_cmake \
     -B build_normal_cmake
 

@@ -27,6 +27,7 @@ fi
 echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -S atlas_cmake/Projects/WorkDir -B build_atlas_cmake\n"
 cmake \
     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
     -S atlas_cmake/Projects/WorkDir \
     -B build_atlas_cmake
 
