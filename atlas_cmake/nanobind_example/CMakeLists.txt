@@ -36,7 +36,6 @@ nanobind_add_module(
   # replace this flag by NB_SHARED to conserve space by
   # reusing a shared libnanobind across libraries
   NB_STATIC
-  # NB_SHARED
 
   # Source code goes here
   "${CMAKE_CURRENT_SOURCE_DIR}/src/nanobind_example_ext.cpp"
