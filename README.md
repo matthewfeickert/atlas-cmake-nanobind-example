@@ -30,3 +30,17 @@ and to run the ATLAS CMake example run
 ```
 bash build_atlas_cmake.sh
 ```
+
+## Other examples
+
+To verify a simper example first for ATLAS CMake, first run
+
+```
+bash run_docker.sh
+```
+
+(or be already in an ATLAS Analysis Release environment) and then run
+
+```
+build_normal_nlohmann.sh
+```

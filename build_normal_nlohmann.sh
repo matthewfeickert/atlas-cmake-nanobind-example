@@ -19,6 +19,9 @@ else
     asetup AnalysisBase,main,latest
 fi
 
+echo -e "\n# git submodule update --init --recursive\n"
+git submodule update --init --recursive
+
 if [[ -d build_normal_nlohmann ]]; then
     echo -e "\n# rm -rf build_normal_nlohmann\n"
     rm -rf build_normal_nlohmann
