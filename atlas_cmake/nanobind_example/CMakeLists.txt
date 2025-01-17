@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15...3.30)
+cmake_minimum_required(VERSION 3.15...3.31)
 atlas_subdir(nanobind_example)
 
 if (CMAKE_VERSION VERSION_LESS 3.18)
