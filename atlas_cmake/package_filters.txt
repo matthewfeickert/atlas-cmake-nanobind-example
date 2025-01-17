@@ -1,4 +1,6 @@
+# simple_project normal C++ but setup to work with an ATLAS Analysis Release layout
 + simple_project
+# nlohmann_example is an example project that involves an external Git submodule
 + nlohmann_example
 #
 - .*
