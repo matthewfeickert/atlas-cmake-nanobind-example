@@ -50,8 +50,11 @@ cd build_atlas_cmake
 echo -e "\n# Setup environment\n# . $(find . -type f -iname "setup.sh")\n"
 . $(find . -type f -iname "setup.sh")
 
-echo -e "\n# find . -type f -iname '*examplelib*'\n"
-find . -type f -iname '*examplelib*'
+# echo -e "\n# find . -type f -iname '*examplelib*'\n"
+# find . -type f -iname '*examplelib*'
 
-echo -e "\n# example-bin\n"
-example-bin
+# echo -e "\n# example-bin\n"
+# example-bin
+
+# echo -e "\n# $(find . -type f -iname example)\n"
+# $(find . -type f -iname example)
