@@ -34,6 +34,7 @@ cmake \
 echo -e "\n# cmake build_atlas_cmake -LH\n"
 cmake build_atlas_cmake -LH
 
+rm -rf build_atlas_cmake.log
 echo -e "\n# cmake --build build_atlas_cmake --clean-first --parallel 8\n"
 # cmake \
 #     --build build_atlas_cmake \
@@ -42,7 +43,7 @@ echo -e "\n# cmake --build build_atlas_cmake --clean-first --parallel 8\n"
 cmake \
     --build build_atlas_cmake \
     --clean-first \
-    --parallel 8
+    --parallel 8 2>&1 | tee build_atlas_cmake.log
 
 echo -e "\n# cd build_atlas_cmake\n"
 cd build_atlas_cmake
