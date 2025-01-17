@@ -48,3 +48,6 @@ cd build_atlas_nlohmann
 
 echo -e "\n# Setup environment\n# . $(find . -type f -iname "setup.sh")\n"
 . $(find . -type f -iname "setup.sh")
+
+echo -e "\n# $(find . -type f -iname example)\n"
+$(find . -type f -iname example)
