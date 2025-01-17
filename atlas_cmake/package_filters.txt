@@ -2,7 +2,7 @@
 + simple_project
 # nlohmann_example is an example project that involves an external Git submodule
 + nlohmann_example
-# Add nanboind example project
+# Add nanobind example project
 + nanobind_example
 #
 - .*
