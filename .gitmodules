@@ -1,3 +1,6 @@
 [submodule "normal_nlohmann/json"]
 	path = normal_nlohmann/json
 	url = https://github.com/nlohmann/json.git
+[submodule "atlas_cmake/nlohmann_example/json"]
+	path = atlas_cmake/nlohmann_example/json
+	url = https://github.com/nlohmann/json.git
