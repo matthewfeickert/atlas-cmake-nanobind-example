@@ -42,6 +42,8 @@ find_package(nanobind CONFIG REQUIRED)
 #   "${CMAKE_CURRENT_SOURCE_DIR}/src/nanobind_example_ext.cpp"
 # )
 
+message(AnalysisBaseExternals_INCLUDE_DIR="${AnalysisBaseExternals_INCLUDE_DIR}")
+
 # Low level API: https://nanobind.readthedocs.io/en/latest/api_cmake.html#low-level-interface
 # Build the core parts of nanobind once
 nanobind_build_library(nanobind SHARED)
@@ -54,7 +56,7 @@ add_library(
 )
 
 # .. and link it against the nanobind parts
-# target_link_libraries(nanobind_example_ext PRIVATE nanobind)
+target_link_libraries(nanobind_example_ext PRIVATE nanobind)
 
 # # .. enable size optimizations
 # nanobind_opt_size(nanobind_example_ext)
