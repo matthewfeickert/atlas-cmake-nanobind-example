@@ -42,7 +42,10 @@ find_package(nanobind CONFIG REQUIRED)
 #   "${CMAKE_CURRENT_SOURCE_DIR}/src/nanobind_example_ext.cpp"
 # )
 
+message("# DEBUG PRINT STATEMENTS")
 message(AnalysisBaseExternals_INCLUDE_DIR="${AnalysisBaseExternals_INCLUDE_DIR}")
+message(nanobind_ROOT="${nanobind_ROOT}")
+message(CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS}")
 
 # Low level API: https://nanobind.readthedocs.io/en/latest/api_cmake.html#low-level-interface
 # Build the core parts of nanobind once
