@@ -22,7 +22,9 @@ find_package(nanobind CONFIG REQUIRED)
 
 # Variable to allows switching between using shared or static libnanobind
 # for users in an ATLAS Analysis Release environment with ATLAS CMake
-set(NANOBIND_LIBRARY_TYPE NB_SHARED)
+if(NOT DEFINED NANOBIND_LIBRARY_TYPE)
+  set(NANOBIND_LIBRARY_TYPE NB_SHARED)
+endif()
 
 # High level API: https://nanobind.readthedocs.io/en/latest/api_cmake.html#high-level-interface
 nanobind_add_module(

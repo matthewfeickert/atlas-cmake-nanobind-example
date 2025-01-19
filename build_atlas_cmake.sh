@@ -28,6 +28,7 @@ echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -
 cmake \
     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DNANOBIND_LIBRARY_TYPE=NB_SHARED \
     -S atlas_cmake/Projects/WorkDir \
     -B build_atlas_cmake
 
