@@ -59,3 +59,9 @@ echo -e "\n# Setup environment\n# . $(find . -type f -iname "setup.sh")\n"
 
 # echo -e "\n# $(find . -type f -iname example)\n"
 # $(find . -type f -iname example)
+
+echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'\n"
+python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'
+
+echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'\n"
+python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'

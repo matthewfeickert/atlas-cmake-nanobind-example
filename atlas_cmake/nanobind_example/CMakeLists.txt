@@ -47,12 +47,14 @@ message(AnalysisBaseExternals_INCLUDE_DIR="${AnalysisBaseExternals_INCLUDE_DIR}"
 message(nanobind_ROOT="${nanobind_ROOT}")
 message(CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS}")
 
+# cmake version in environment: 3.29.5
 # print results variables: https://cmake.org/cmake/help/latest/module/FindPython.html#result-variables
 message(Python_FOUND="${Python_FOUND}")
 message(Python_Interpreter_FOUND="${Python_Interpreter_FOUND}")
 message(Python_EXECUTABLE="${Python_EXECUTABLE}")
 message(Python_EXECUTABLE_DEBUG="${Python_EXECUTABLE_DEBUG}")
-message(Python_INTERPRETER="${Python_INTERPRETER}")
+# Added in CMake v3.30
+# message(Python_INTERPRETER="${Python_INTERPRETER}")
 message(Python_INTERPRETER_ID="${Python_INTERPRETER_ID}")
 message(Python_STDLIB="${Python_STDLIB}")
 message(Python_STDARCH="${Python_STDARCH}")
@@ -89,6 +91,13 @@ message(Python_NumPy_VERSION="${Python_NumPy_VERSION}")
 # Low level API: https://nanobind.readthedocs.io/en/latest/api_cmake.html#low-level-interface
 # Build the core parts of nanobind once
 nanobind_build_library(nanobind SHARED)
+target_include_directories(nanobind PRIVATE "${Python_INCLUDE_DIRS}")
+target_link_libraries(
+  nanobind
+  PRIVATE
+  "-Wl,-rpath,${Python_STDLIB}/.. -L${Python_STDLIB}/.."
+  "python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}"
+)
 
 # Compile an extension library
 add_library(
@@ -98,31 +107,39 @@ add_library(
 )
 
 # .. and link it against the nanobind parts
-target_link_libraries(nanobind_example_ext PRIVATE nanobind)
+# target_link_libraries(nanobind_example_ext PRIVATE nanobind)
+target_include_directories(nanobind_example_ext PRIVATE "${Python_INCLUDE_DIRS}")
+target_link_libraries(
+  nanobind_example_ext
+  PRIVATE
+  "-Wl,-rpath,${Python_STDLIB}/.. -L${Python_STDLIB}/.."
+  nanobind
+  "python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}"
+)
 
-# # .. enable size optimizations
-# nanobind_opt_size(nanobind_example_ext)
+# .. enable size optimizations
+nanobind_opt_size(nanobind_example_ext)
 
-# # .. enable link time optimization
-# nanobind_lto(nanobind_example_ext)
+# .. enable link time optimization
+nanobind_lto(nanobind_example_ext)
 
-# # .. set the default symbol visibility to 'hidden'
-# nanobind_set_visibility(nanobind_example_ext)
+# .. set the default symbol visibility to 'hidden'
+nanobind_set_visibility(nanobind_example_ext)
 
-# # .. strip unneeded symbols and debug info from the binary (only active in release builds)
-# nanobind_strip(nanobind_example_ext)
+# .. strip unneeded symbols and debug info from the binary (only active in release builds)
+nanobind_strip(nanobind_example_ext)
 
-# # .. disable the stack protector
-# nanobind_disable_stack_protector(nanobind_example_ext)
+# .. disable the stack protector
+nanobind_disable_stack_protector(nanobind_example_ext)
 
-# # .. set the Python extension suffix
-# nanobind_extension(nanobind_example_ext)
+# .. set the Python extension suffix
+nanobind_extension(nanobind_example_ext)
 
-# # .. set important compilation flags
-# nanobind_compile_options(nanobind_example_ext)
+# .. set important compilation flags
+nanobind_compile_options(nanobind_example_ext)
 
-# # .. set important linker flags
-# nanobind_link_options(nanobind_example_ext)
+# .. set important linker flags
+nanobind_link_options(nanobind_example_ext)
 
-# # Statically link against libstdc++/libgcc when targeting musllinux
-# nanobind_musl_static_libcpp(nanobind_example_ext)
+# Statically link against libstdc++/libgcc when targeting musllinux
+nanobind_musl_static_libcpp(nanobind_example_ext)
