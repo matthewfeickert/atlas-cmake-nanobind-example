@@ -20,6 +20,10 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE nanobind_ROOT)
 find_package(nanobind CONFIG REQUIRED)
 
+# Variable to allows switching between using shared or static libnanobind
+# for users in an ATLAS Analysis Release environment with ATLAS CMake
+set(NANOBIND_LIBRARY_TYPE NB_SHARED)
+
 # High level API: https://nanobind.readthedocs.io/en/latest/api_cmake.html#high-level-interface
 nanobind_add_module(
   # Name of the extension
@@ -36,11 +40,22 @@ nanobind_add_module(
   # If your project builds multiple extensions, you can
   # replace this flag by NB_SHARED to conserve space by
   # reusing a shared libnanobind across libraries
-  NB_STATIC
+  "${NANOBIND_LIBRARY_TYPE}"
 
   # Source code goes here
   "${CMAKE_CURRENT_SOURCE_DIR}/src/nanobind_example_ext.cpp"
 )
+
+# Required if and only if using NB_SHARED
+if (NANOBIND_LIBRARY_TYPE STREQUAL "NB_SHARED")
+  target_link_libraries(
+    nanobind
+    PRIVATE
+    "-Wl,-rpath,${Python_STDLIB}/.. -L${Python_STDLIB}/.."
+    "python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}"
+  )
+endif()
+
 # Fix to deal with ATLAS Analysis Base issues
 target_link_libraries(
   nanobind_example_ext
