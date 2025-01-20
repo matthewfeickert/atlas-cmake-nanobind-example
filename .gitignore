@@ -164,3 +164,7 @@ cython_debug/
 # project specfic
 build_normal_cmake/
 build_atlas_cmake/
+
+# pixi environments
+.pixi
+*.egg-info
