@@ -24,6 +24,7 @@ find_package(nanobind CONFIG REQUIRED)
 
 # Variable to allows switching between using shared or static libnanobind
 # for users in an ATLAS Analysis Release environment with ATLAS CMake
+# c.f. https://github.com/wjakob/nanobind/blob/e13448781a608efd3b1cb97a92e756a426400c60/docs/api_cmake.rst#high-level-interface
 if(NOT DEFINED NANOBIND_LIBRARY_TYPE)
   set(NANOBIND_LIBRARY_TYPE NB_SHARED)
 endif()
@@ -37,6 +38,9 @@ nanobind_add_module(
   # the number of binary wheels that must be built. This
   # does nothing on older Python versions
   STABLE_ABI
+
+  # Perform link time optimization
+  LTO
 
   # Build libnanobind statically and merge it into the
   # extension (which itself remains a shared library)
