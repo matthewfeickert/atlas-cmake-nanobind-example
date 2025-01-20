@@ -3,7 +3,13 @@ atlas_subdir(nanobind_example)
 
 # Though nanobind only needs Development.Module it seems ATLAS CMake requires
 # the full Development to be used.
-find_package(Python 3.8 COMPONENTS Interpreter Development REQUIRED)
+if (CMAKE_VERSION VERSION_LESS 3.18)
+  set(DEV_MODULE Development)
+else()
+  set(DEV_MODULE Development Development.Module)
+endif()
+
+find_package(Python 3.8 COMPONENTS Interpreter ${DEV_MODULE} REQUIRED)
 
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
