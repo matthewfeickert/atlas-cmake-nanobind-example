@@ -27,16 +27,16 @@ if [[ ! -x $(command -v cvmfs-venv) ]]; then
     chmod +x ~/.local/bin/cvmfs-venv
 fi
 
-if [[ ! -d .venv ]]; then
-    # Ensure user controlled virtual environment
-    cvmfs-venv .venv
-    . .venv/bin/activate
-    uv pip install --upgrade pytest
-    deactivate
-fi
+# if [[ ! -d .venv ]]; then
+#     # Ensure user controlled virtual environment
+#     cvmfs-venv .venv
+#     . .venv/bin/activate
+#     uv pip install --upgrade pytest
+#     deactivate
+# fi
 
-echo -e "\n# . .venv/bin/activate\n"
-. .venv/bin/activate
+# echo -e "\n# . .venv/bin/activate\n"
+# . .venv/bin/activate
 
 if [[ -d build_normal_cmake ]]; then
     echo -e "\n# rm -rf build_normal_cmake\n"
@@ -45,6 +45,7 @@ fi
 
 echo -e "\n# cmake -S normal_cmake -B build_normal_cmake\n"
 cmake \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
     -S normal_cmake \
     -B build_normal_cmake
 

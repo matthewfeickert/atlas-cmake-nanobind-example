@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.16...3.31)
-project(nanobind_atlas_cmake_example)
+atlas_subdir(nanobind_example)
 
+# Though nanobind only needs Development.Module it seems ATLAS CMake requires
+# the full Development to be used.
 if (CMAKE_VERSION VERSION_LESS 3.18)
   set(DEV_MODULE Development)
 else()
-  set(DEV_MODULE Development.Module)
+  set(DEV_MODULE Development Development.Module)
 endif()
 
 find_package(Python 3.8 COMPONENTS Interpreter ${DEV_MODULE} REQUIRED)
@@ -20,6 +22,14 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE nanobind_ROOT)
 find_package(nanobind CONFIG REQUIRED)
 
+# Variable to allows switching between using shared or static libnanobind
+# for users in an ATLAS Analysis Release environment with ATLAS CMake
+# c.f. https://github.com/wjakob/nanobind/blob/e13448781a608efd3b1cb97a92e756a426400c60/docs/api_cmake.rst#high-level-interface
+if(NOT DEFINED NANOBIND_LIBRARY_LINK_TYPE)
+  set(NANOBIND_LIBRARY_LINK_TYPE NB_SHARED)
+endif()
+
+# High level API: https://nanobind.readthedocs.io/en/latest/api_cmake.html#high-level-interface
 nanobind_add_module(
   # Name of the extension
   nanobind_example_ext
@@ -29,14 +39,35 @@ nanobind_add_module(
   # does nothing on older Python versions
   STABLE_ABI
 
+  # Perform link time optimization
+  LTO
+
   # Build libnanobind statically and merge it into the
   # extension (which itself remains a shared library)
   #
   # If your project builds multiple extensions, you can
   # replace this flag by NB_SHARED to conserve space by
   # reusing a shared libnanobind across libraries
-  NB_STATIC
+  "${NANOBIND_LIBRARY_LINK_TYPE}"
 
   # Source code goes here
-  src/nanobind_example_ext.cpp
+  "${CMAKE_CURRENT_SOURCE_DIR}/src/nanobind_example_ext.cpp"
+)
+
+# ATLAS CMake needs to be told about the Python libraries at link time.
+# This is NOT required for normal CMake.
+
+# Required if and only if using NB_SHARED
+if (NANOBIND_LIBRARY_LINK_TYPE STREQUAL "NB_SHARED")
+  target_link_libraries(
+    nanobind
+    PRIVATE
+  "${Python_LIBRARIES}"
+  )
+endif()
+
+target_link_libraries(
+  nanobind_example_ext
+  PRIVATE
+  "${Python_LIBRARIES}"
 )

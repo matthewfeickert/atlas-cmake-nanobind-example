@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15...3.30)
+cmake_minimum_required(VERSION 3.16...3.31)
 # ATLAS CMake requires "atlas_subdir" instead of "project"
 # project(simple_project)
 atlas_subdir(simple_project)

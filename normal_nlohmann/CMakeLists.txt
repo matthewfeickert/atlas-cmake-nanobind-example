@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15...3.30)
+cmake_minimum_required(VERSION 3.15...3.31)
 project(nlohmann_json_example)
 
 find_package(nlohmann_json 3.2.0 REQUIRED)

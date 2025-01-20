@@ -27,12 +27,15 @@ fi
 echo -e "\n# cmake -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt -S atlas_cmake/Projects/WorkDir -B build_atlas_cmake\n"
 cmake \
     -DATLAS_PACKAGE_FILTER_FILE=atlas_cmake/package_filters.txt \
+    -DCMAKE_VERBOSE_MAKEFILE=ON \
+    -DNANOBIND_LIBRARY_LINK_TYPE=NB_SHARED \
     -S atlas_cmake/Projects/WorkDir \
     -B build_atlas_cmake
 
 echo -e "\n# cmake build_atlas_cmake -LH\n"
 cmake build_atlas_cmake -LH
 
+rm -rf build_atlas_cmake.log
 echo -e "\n# cmake --build build_atlas_cmake --clean-first --parallel 8\n"
 # cmake \
 #     --build build_atlas_cmake \
@@ -41,7 +44,7 @@ echo -e "\n# cmake --build build_atlas_cmake --clean-first --parallel 8\n"
 cmake \
     --build build_atlas_cmake \
     --clean-first \
-    --parallel 8
+    --parallel 8 2>&1 | tee build_atlas_cmake.log
 
 echo -e "\n# cd build_atlas_cmake\n"
 cd build_atlas_cmake
@@ -52,5 +55,11 @@ echo -e "\n# Setup environment\n# . $(find . -type f -iname "setup.sh")\n"
 echo -e "\n# find . -type f -iname '*examplelib*'\n"
 find . -type f -iname '*examplelib*'
 
-echo -e "\n# example-bin\n"
-example-bin
+echo -e "\n# $(find . -type f -iname example-bin)\n"
+$(find . -type f -iname example-bin)
+
+echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'\n"
+python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'
+
+echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'\n"
+python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'
