@@ -1,13 +1,9 @@
-cmake_minimum_required(VERSION 3.15...3.31)
+cmake_minimum_required(VERSION 3.16...3.31)
 atlas_subdir(nanobind_example)
 
-if (CMAKE_VERSION VERSION_LESS 3.18)
-  set(DEV_MODULE Development)
-else()
-  set(DEV_MODULE Development.Module)
-endif()
-
-find_package(Python 3.8 COMPONENTS Interpreter ${DEV_MODULE} REQUIRED)
+# Though nanobind only needs Development.Module it seems ATLAS CMake requires
+# the full Development to be used.
+find_package(Python 3.8 COMPONENTS Interpreter Development REQUIRED)
 
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
@@ -48,20 +44,20 @@ nanobind_add_module(
   "${CMAKE_CURRENT_SOURCE_DIR}/src/nanobind_example_ext.cpp"
 )
 
+# ATLAS CMake needs to be told about the Python libraries at link time.
+# This is NOT required for normal CMake.
+
 # Required if and only if using NB_SHARED
 if (NANOBIND_LIBRARY_TYPE STREQUAL "NB_SHARED")
   target_link_libraries(
     nanobind
     PRIVATE
-    "-Wl,-rpath,${Python_STDLIB}/.. -L${Python_STDLIB}/.."
-    "python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}"
+  "${Python_LIBRARIES}"
   )
 endif()
 
-# Fix to deal with ATLAS Analysis Base issues
 target_link_libraries(
   nanobind_example_ext
   PRIVATE
-  "-Wl,-rpath,${Python_STDLIB}/.. -L${Python_STDLIB}/.."
-  "python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}"
+  "${Python_LIBRARIES}"
 )
