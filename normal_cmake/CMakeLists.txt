@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15...3.31)
+cmake_minimum_required(VERSION 3.16...3.31)
 project(nanobind_atlas_cmake_example)
 
 if (CMAKE_VERSION VERSION_LESS 3.18)
