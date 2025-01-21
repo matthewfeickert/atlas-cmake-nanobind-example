@@ -70,3 +70,6 @@ python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(1, 2))'
 
 echo -e "\n# python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'\n"
 python -c 'import nanobind_example_ext; print(nanobind_example_ext.add(a=1, b=2))'
+
+echo -e "\n# python -c 'from nanobind_example_ext import Vector2; v1 = Vector2(1, 2.); v2 = Vector2(3., 4.); print(f"v1={v1}"); print(f"v2={v2}"); print(f"v1 + v2={v1 + v2}")'\n"
+python -c 'from nanobind_example_ext import Vector2; v1 = Vector2(1, 2.); v2 = Vector2(3., 4.); print(f"v1={v1}"); print(f"v2={v2}"); print(f"v1 + v2={v1 + v2}")'
