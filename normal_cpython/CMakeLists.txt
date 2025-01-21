@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16...3.31)
 project(cpython_api_cmake_example)
 
-find_package(Python 3.8 COMPONENTS Interpreter Development Development.Embed REQUIRED)
+find_package(Python 3.8 COMPONENTS Interpreter Development REQUIRED)
 
 if (NOT TARGET Python::Python)
   message(
