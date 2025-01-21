@@ -12,15 +12,6 @@ endif()
 
 find_package(Python 3.8 COMPONENTS Interpreter ${DEV_MODULE} REQUIRED)
 
-if (NOT TARGET Python::Python)
-  message(
-    FATAL_ERROR
-    "As component Development.Embed was not found"
-    " (Python_Development.Embed_FOUND=${Python_Development.Embed_FOUND}) the"
-    " required imported target Python::Python was not defined."
-    )
-endif()
-
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
