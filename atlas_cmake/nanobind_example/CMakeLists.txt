@@ -2,14 +2,24 @@ cmake_minimum_required(VERSION 3.16...3.31)
 atlas_subdir(nanobind_example)
 
 # Though nanobind only needs Development.Module it seems ATLAS CMake requires
-# the full Development to be used.
+# the full Development (Development.Module and Development.Embed) to be used.
 if (CMAKE_VERSION VERSION_LESS 3.18)
   set(DEV_MODULE Development)
 else()
-  set(DEV_MODULE Development Development.Module)
+  # Development.Embed required for Python::Python imported target
+  set(DEV_MODULE Development.Module Development.Embed)
 endif()
 
 find_package(Python 3.8 COMPONENTS Interpreter ${DEV_MODULE} REQUIRED)
+
+if (NOT TARGET Python::Python)
+  message(
+    FATAL_ERROR
+    "As component Development.Embed was not found"
+    " (Python_Development.Embed_FOUND=${Python_Development.Embed_FOUND}) the"
+    " required imported target Python::Python was not defined."
+    )
+endif()
 
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
@@ -59,15 +69,8 @@ nanobind_add_module(
 
 # Required if and only if using NB_SHARED
 if (NANOBIND_LIBRARY_LINK_TYPE STREQUAL "NB_SHARED")
-  target_link_libraries(
-    nanobind
-    PRIVATE
-  "${Python_LIBRARIES}"
-  )
+  # Imported target Python::Python defined if component Development.Embed is found
+  target_link_libraries(nanobind PRIVATE Python::Python)
 endif()
 
-target_link_libraries(
-  nanobind_example_ext
-  PRIVATE
-  "${Python_LIBRARIES}"
-)
+target_link_libraries(nanobind_example_ext PRIVATE Python::Python)
